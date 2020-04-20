@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="baseDir">${sys:user.dir}/logs</Property>
+    </Properties>
+
+	 <loggers>
+        <logger name="com.geektcp.alpha.test" level="INFO">
+            <appender-ref ref="RollingFileError"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+            <!--<appender-ref ref="RollingFileInfo"/>-->
+            <!--<appender-ref ref="RollingFileWarn"/>-->
+            <!--<appender-ref ref="RollingFileError"/>-->
+            <!--<appender-ref ref="RollingFileDebug"/>-->
+        </root>
+    </loggers>
+	
+    <appenders>
+        <console name="Console" target="SYSTEM_OUT">
+            <Filters>
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="NEUTRAL" />
+            </Filters>
+            <PatternLayout charset="UTF-8" pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] %p - %l - %m%n"/>
+        </console>
+        <RollingRandomAccessFile name="RollingFileInfo" fileName="${baseDir}/info.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM-dd}/info-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout charset="UTF-8"  pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] %p - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="200 MB"/>
+            </Policies>
+
+            <DefaultRolloverStrategy max="100" >
+                <Delete basePath="${baseDir}" maxDepth="1">
+                    <IfFileName glob="*.log" />
+                    <IfLastModified age="7d">
+                        <IfAny>
+                            <IfAccumulatedFileSize exceeds="1 GB" />
+                        </IfAny>
+                    </IfLastModified>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="RollingFileWarn" fileName="${baseDir}/warn.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM-dd}/warn-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout charset="UTF-8" pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] %p - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="200 MB"/>
+            </Policies>
+
+            <DefaultRolloverStrategy max="100" >
+                <Delete basePath="${baseDir}" maxDepth="1">
+                    <IfFileName glob="*.log" />
+                    <IfLastModified age="7d">
+                        <IfAny>
+                            <IfAccumulatedFileSize exceeds="1 GB" />
+                        </IfAny>
+                    </IfLastModified>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="RollingFileError" fileName="${baseDir}/error.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM-dd}/error-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="FATAL" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout charset="UTF-8" pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] %p - %l - %m%n"/>
+
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="200 MB"/>
+            </Policies>
+
+            <DefaultRolloverStrategy max="100" >
+                <Delete basePath="${baseDir}" maxDepth="1">
+                    <IfFileName glob="*.log" />
+                    <IfLastModified age="7d">
+                        <IfAny>
+                            <IfAccumulatedFileSize exceeds="1 GB" />
+                        </IfAny>
+                    </IfLastModified>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="RollingFileDebug" fileName="${baseDir}/debug.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM-dd}/debug-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout charset="UTF-8" pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] %p - %l - %m%n"/>
+
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="200 MB"/>
+            </Policies>
+
+            <DefaultRolloverStrategy max="100" >
+                <Delete basePath="${baseDir}" maxDepth="1">
+                    <IfFileName glob="*.log" />
+                    <IfLastModified age="7d">
+                        <IfAny>
+                            <IfAccumulatedFileSize exceeds="1 GB" />
+                        </IfAny>
+                    </IfLastModified>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+
+    </appenders>
+
+</configuration>

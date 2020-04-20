@@ -1,6 +1,7 @@
 package com.geektcp.alpha.game.chess.chess;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Tong on 12.15.
@@ -12,7 +13,10 @@ public class Rules {
     private static Board board;
     private static char player;
 
-    public static ArrayList<int[]> getNextMove(String piece, int[] pos, Board board) {
+    private Rules(){
+    }
+
+    public static List<int[]> getNextMove(String piece, int[] pos, Board board) {
         Rules.pos = pos;
         Rules.board = board;
         Rules.player = piece.charAt(0);
@@ -37,7 +41,7 @@ public class Rules {
     }
 
     private static ArrayList<int[]> mRules() {
-        ArrayList<int[]> moves = new ArrayList<int[]>();
+        ArrayList<int[]> moves = new ArrayList<>();
         int[][] target = new int[][]{{1, -2}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}, {-1, -2}};
         int[][] obstacle = new int[][]{{0, -1}, {1, 0}, {1, 0}, {0, 1}, {0, 1}, {-1, 0}, {-1, 0}, {0, -1}};
         for (int i = 0; i < target.length; i++) {
@@ -52,8 +56,8 @@ public class Rules {
         return moves;
     }
 
-    private static ArrayList<int[]> jRules() {
-        ArrayList<int[]> moves = new ArrayList<int[]>();
+    private static List<int[]> jRules() {
+        ArrayList<int[]> moves = new ArrayList<>();
         int[] yOffsets = new int[]{1, 2, 3, 4, 5, 6, 7, 8};
         int[] xOffsets = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
         for (int offset : yOffsets) {
@@ -150,7 +154,7 @@ public class Rules {
     }
 
     private static ArrayList<int[]> xRules() {
-        ArrayList<int[]> moves = new ArrayList<int[]>();
+        ArrayList<int[]> moves = new ArrayList<>();
         int[][] target = new int[][]{{-2, -2}, {2, -2}, {-2, 2}, {2, 2}};
         int[][] obstacle = new int[][]{{-1, -1}, {1, -1}, {-1, 1}, {1, 1}};
         for (int i = 0; i < target.length; i++) {
@@ -166,7 +170,7 @@ public class Rules {
     }
 
     private static ArrayList<int[]> sRules() {
-        ArrayList<int[]> moves = new ArrayList<int[]>();
+        ArrayList<int[]> moves = new ArrayList<>();
         int[][] target = new int[][]{{-1, -1}, {1, 1}, {-1, 1}, {1, -1}};
         for (int[] aTarget : target) {
             int[] e = new int[]{pos[0] + aTarget[0], pos[1] + aTarget[1]};
@@ -179,7 +183,7 @@ public class Rules {
     }
 
     private static ArrayList<int[]> bRules() {
-        ArrayList<int[]> moves = new ArrayList<int[]>();
+        ArrayList<int[]> moves = new ArrayList<>();
         /* 3*3 block */
         int[][] target = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         for (int[] aTarget : target) {
@@ -205,7 +209,7 @@ public class Rules {
     }
 
     private static ArrayList<int[]> zRules() {
-        ArrayList<int[]> moves = new ArrayList<int[]>();
+        ArrayList<int[]> moves = new ArrayList<>();
         int[][] targetU = new int[][]{{0, 1}, {0, -1}, {-1, 0}};
         int[][] targetD = new int[][]{{0, 1}, {0, -1}, {1, 0}};
         if (player == 'r') {
