@@ -8,7 +8,10 @@
 因为世界上绝大多数的棋类游戏，都是在较量谁会先犯错
 ```
 
-# C/S架构
+# B/S架构
 ```
-web模式棋盘+AI中间件+Tensorflow分布式计算学习
+前端框架: react
+后端: SpringBoot
+中间件：Tensorflow
+消息框架：SocketIO
 ```
